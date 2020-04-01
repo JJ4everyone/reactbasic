@@ -2,8 +2,8 @@ import React from 'react';
 import { Card, CardImg, CardImgOverlay,
   CardTitle } from 'reactstrap';
   import {Link} from 'react-router-dom';
-
-  function RenderItem({dish,onclick}) {
+import {Loading} from '../redux/loading';
+  function RenderItem({dish}) {
     return(
       <Card>
         <Link to = {`/menu/${dish.id}`}>
@@ -18,7 +18,7 @@ import { Card, CardImg, CardImgOverlay,
     
   }
   const Menu = (props)=>{
-        const menu = props.dishes.map((dish)=>
+        const menu = props.dishes.dishes.map((dish)=>
         {
           return(
             <div className="col-12 col-md-5 m-1" key={dish.id}>
@@ -26,6 +26,27 @@ import { Card, CardImg, CardImgOverlay,
             </div>
               );
         })
+        if (props.dishes.isLoading) {
+          return(
+              <div className="container">
+                  <div className="row">            
+                      <Loading />
+                  </div>
+              </div>
+          );
+      }
+      else if (props.dishes.errMess) {
+          return(
+              <div className="container">
+                  <div className="row"> 
+                      <div className="col-12">
+                          <h4>{props.dishes.errMess}</h4>
+                      </div>
+                  </div>
+              </div>
+          );
+      }
+      else
         return(
             <div className="container">
               <div className="row">

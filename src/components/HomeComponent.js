@@ -1,12 +1,24 @@
 import React from 'react';
 import {Card,CardBody,CardTitle,CardSubtitle,CardText, CardImg,Breadcrumb,BreadcrumbItem} from 'reactstrap';
 import { Link } from 'react-router-dom';
+import {Loading} from '../redux/loading';
 
 
+function Rcard({item,isLoading,errMess}) {
 
-function Rcard({item}) {
-    return (
-        
+      
+    if (isLoading) {
+        return(
+                <Loading />
+        );
+    }
+    else if (errMess) {
+        return(
+                <h4>{errMess}</h4>
+        );
+    }
+    else
+    return (         
             <Card>
                 <CardImg src={item.image} alt ={item.name}/>
                 <CardBody>
@@ -42,7 +54,7 @@ function Rcard({item}) {
             </div>
           <div className="row align-items-start">
               <div className="col-12 col-md m-2">
-                  <Rcard item={props.dishes}/>
+                  <Rcard item={props.dishes}  isLoading={props.dishesLoading} errMess={props.dishesErrMess}/>
               </div>
               <div className="col-12 col-md m-2">
                    <Rcard item={props.promotions}/>

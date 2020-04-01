@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 function RenderLeader({item}){
     return(
          <Media>
-             <Media left middle md={8}>
+             <Media left middle>
                  <Media object src={item.image} alt={item.name} className="mr-5"/>
              </Media>
              <Media body>
